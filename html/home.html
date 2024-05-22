@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Chat App - Home</title>
+    <link rel="stylesheet" href="../css/home_style.css">
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <img src="../img/logo.png" alt="My Chat App Logo" class="logo">
+    </div>
+    <div class="online-counter">
+        Chatters Online: <span id="onlineUsers">0</span>
+    </div>
+</header>
+<div class="content">
+    <aside class="friends-list">
+        <h2>Friends</h2>
+        <div class="friends-category">
+            <div class="category-header" onclick="toggleCategory('online')">
+                Online <span id="onlineCount"></span> <span class="arrow" id="onlineArrow">▼</span>
+            </div>
+            <ul id="onlineFriends" class="friends-list-category">
+                <!-- Online friends will be rendered here -->
+            </ul>
+        </div>
+        <div class="friends-category">
+            <div class="category-header" onclick="toggleCategory('offline')">
+                Offline <span id="offlineCount"></span> <span class="arrow" id="offlineArrow">▼</span>
+            </div>
+            <ul id="offlineFriends" class="friends-list-category">
+                <!-- Offline friends will be rendered here -->
+            </ul>
+        </div>
+    </aside>
+    <main class="home-container">
+        <div class="interests-container">
+            <div class="interests-display" id="interestsDisplay"></div>
+            <input type="text" id="interests" placeholder="Enter your interests" onkeyup="handleKeyUp(event)">
+        </div>
+        <button class="start-chatting" onclick="startChatting()">Start Chatting</button>
+    </main>
+</div>
+
+<script>
+    let interests = [];
+    let friends = [
+        { username: 'Alice', online: true },
+        { username: 'Bob', online: false },
+        { username: 'Charlie', online: true },
+        { username: 'Dave', online: false },
+        { username: 'Eve', online: true }
+    ];
+
+    function handleKeyUp(event) {
+        const input = document.getElementById('interests');
+        if (event.key === 'Enter' && input.value.trim() !== '') {
+            interests.push(input.value.trim());
+            input.value = '';
+            renderInterests();
+        } else if (event.key === 'Backspace' && input.value === '') {
+            interests.pop();
+            renderInterests();
+        }
+    }
+
+    function renderInterests() {
+        const display = document.getElementById('interestsDisplay');
+        display.innerHTML = '';
+        interests.forEach(interest => {
+            const interestSpan = document.createElement('span');
+            interestSpan.className = 'interest-tag';
+            interestSpan.textContent = interest;
+            display.appendChild(interestSpan);
+        });
+    }
+
+    function toggleCategory(category) {
+        const categoryList = document.getElementById(`${category}Friends`);
+        const arrow = document.getElementById(`${category}Arrow`);
+        if (categoryList.style.display === 'none') {
+            categoryList.style.display = 'block';
+            arrow.textContent = '▼';
+        } else {
+            categoryList.style.display = 'none';
+            arrow.textContent = '▲';
+        }
+    }
+
+    function renderFriends() {
+        const onlineFriendsList = document.getElementById('onlineFriends');
+        const offlineFriendsList = document.getElementById('offlineFriends');
+        onlineFriendsList.innerHTML = '';
+        offlineFriendsList.innerHTML = '';
+        let onlineCount = 0;
+        let offlineCount = 0;
+
+        friends.forEach((friend, index) => {
+            const friendItem = document.createElement('li');
+            friendItem.className = 'friend-item';
+            friendItem.setAttribute('data-index', index);
+            friendItem.onclick = function() {
+                toggleFriendMenu(index);
+            };
+
+            const statusSpan = document.createElement('span');
+            statusSpan.className = 'status ' + (friend.online ? 'online' : 'offline');
+
+            const usernameSpan = document.createElement('span');
+            usernameSpan.className = 'username';
+            usernameSpan.textContent = friend.username;
+
+            const friendMenu = document.createElement('div');
+            friendMenu.className = 'friend-menu';
+            friendMenu.innerHTML = `
+                <a href="chat.html">Call</a>
+                <a href="profile.html">View Profile</a>
+                <a href="javascript:void(0);" onclick="removeFriend(${index})">Remove Friend</a>
+            `;
+
+            friendItem.appendChild(statusSpan);
+            friendItem.appendChild(usernameSpan);
+            friendItem.appendChild(friendMenu);
+
+            if (friend.online) {
+                onlineFriendsList.appendChild(friendItem);
+                onlineCount++;
+            } else {
+                offlineFriendsList.appendChild(friendItem);
+                offlineCount++;
+            }
+        });
+
+        document.getElementById('onlineCount').textContent = `(${onlineCount})`;
+        document.getElementById('offlineCount').textContent = `(${offlineCount})`;
+    }
+
+    function toggleFriendMenu(index) {
+        const friendItems = document.querySelectorAll('.friend-item');
+        friendItems.forEach((item, idx) => {
+            const menu = item.querySelector('.friend-menu');
+            if (idx === index) {
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        });
+    }
+
+    function removeFriend(index) {
+        friends.splice(index, 1);
+        renderFriends();
+    }
+
+    function startChatting() {
+        alert('Start Chatting button clicked!');
+        // Implement actual functionality here
+    }
+
+    // Initial render
+    renderFriends();
+</script>
+</body>
+</html>

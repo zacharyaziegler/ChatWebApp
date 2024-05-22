@@ -1,0 +1,202 @@
+/* Basic reset for styling consistency */
+body, h1, h2, h3, p, form, input, button, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #333; /* Darker background */
+    color: #ccc; /* Lighter text for readability */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #007BFF; /* Cool blue */
+    height: 60px; /* Approximately an inch on typical screens */
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between; /* Ensures items are spaced out from each other */
+    align-items: center;
+    padding: 0 40px; /* Adds horizontal padding on both sides */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+}
+
+.logo-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.online-counter {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.9em;
+    color: white; /* Making sure the text is visible on the blue background */
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    margin-top: 60px; /* Adjust for fixed header height */
+}
+
+aside.friends-list {
+    width: 250px;
+    background-color: rgba(34, 34, 34, 0.8); /* Slightly darker and transparent */
+    padding: 20px;
+    border-right: 1px solid #444;
+    box-sizing: border-box;
+}
+
+.friends-list h2 {
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+.friends-category {
+    margin-bottom: 20px;
+}
+
+.category-header {
+    color: #007BFF;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category-header .arrow {
+    font-size: 0.8em;
+    margin-left: auto; /* Ensure the arrow stays on the right side */
+}
+
+.friends-list-category {
+    list-style: none;
+    padding: 0;
+    display: block; /* Ensure it is block initially */
+}
+
+.friend-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.friend-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Darken on hover */
+}
+
+.friend-item .status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.friend-item .status.online {
+    background-color: #00ff00; /* Green for online */
+}
+
+.friend-item .status.offline {
+    background-color: #ff0000; /* Red for offline */
+}
+
+.friend-item .username {
+    color: #ccc;
+}
+
+.friend-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background-color: #444;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.friend-menu a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.friend-menu a:hover {
+    background-color: #555;
+    color: white;
+}
+
+main.home-container {
+    flex-grow: 1;
+    margin: 20px;
+    text-align: center;
+}
+
+.interests-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #444;
+    width: 320px;
+    margin: 20px auto;
+    box-sizing: border-box;
+}
+
+.interests-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.interest-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #007BFF; /* Cool blue for tags */
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.interests-container input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    background-color: #444;
+    color: #ddd;
+    outline: none;
+}
+
+.start-chatting {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF; /* Cool blue for button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.start-chatting:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Chat App</title>
+    <link rel="stylesheet" href="../css/index_style.css">
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <img src="img/logo.png" alt="My Chat App Logo" class="logo">
+    </div>
+    <div class="online-counter">
+        Chatters Online: <span id="onlineUsers">0</span>
+    </div>
+</header>
+<main class="login-container">
+    <div class="big-logo-placeholder">
+        <!-- Placeholder for big logo when created -->
+        <img src="img/big-logo-placeholder.png" alt="Big Logo Placeholder">
+    </div>
+    <form action="javascript:void(0);" method="POST" class="login-form" onsubmit="handleLogin()">
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <button type="submit">Log In</button>
+        <p class="signup-prompt">
+            Don't have an account? <a href="signup.html">Sign Up</a>
+        </p>
+    </form>
+</main>
+
+<script>
+    function handleLogin() {
+        // Assuming user has the right credentials (for now, just navigate to home.html)
+        window.location.href = 'home.html';
+    }
+</script>
+</body>
+</html>
