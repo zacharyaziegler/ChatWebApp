@@ -45,23 +45,17 @@
 </div>
 
 <script>
-    let interests = [];
-    let friends = [
-        { username: 'Alice', online: true },
-        { username: 'Bob', online: false },
-        { username: 'Charlie', online: true },
-        { username: 'Dave', online: false },
-        { username: 'Eve', online: true }
-    ];
+    let interests = new Set();
 
     function handleKeyUp(event) {
         const input = document.getElementById('interests');
         if (event.key === 'Enter' && input.value.trim() !== '') {
-            interests.push(input.value.trim());
+            interests.add(input.value.trim());
             input.value = '';
             renderInterests();
         } else if (event.key === 'Backspace' && input.value === '') {
-            interests.pop();
+            const lastInterest = Array.from(interests).pop();
+            interests.delete(lastInterest);
             renderInterests();
         }
     }
@@ -75,6 +69,12 @@
             interestSpan.textContent = interest;
             display.appendChild(interestSpan);
         });
+    }
+
+    function startChatting() {
+        const interestsArray = Array.from(interests);
+        localStorage.setItem('userInterests', JSON.stringify(interestsArray));
+        window.location.href = 'chat.html';
     }
 
     function toggleCategory(category) {
@@ -152,11 +152,6 @@
     function removeFriend(index) {
         friends.splice(index, 1);
         renderFriends();
-    }
-
-    function startChatting() {
-        alert('Start Chatting button clicked!');
-        // Implement actual functionality here
     }
 
     // Initial render
