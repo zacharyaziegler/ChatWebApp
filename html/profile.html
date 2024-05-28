@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Chat App - Profile</title>
+    <link rel="stylesheet" href="../css/profile_style.css">
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <a href="home.html">
+            <img src="../img/logo.png" alt="My Chat App Logo" class="logo">
+        </a>
+    </div>
+    <div class="online-counter">
+        Chatters Online: <span id="onlineUsers">0</span>
+    </div>
+</header>
+<div class="profile-banner">
+    <img src="../img/banner-placeholder.png" alt="Banner Image" class="banner-img">
+    <input type="file" id="bannerUpload" class="upload-btn">
+</div>
+<div class="profile-container">
+    <div class="profile-pic">
+        <img src="../img/profile-placeholder.png" alt="Profile Picture" class="profile-img">
+        <input type="file" id="profilePicUpload" class="upload-btn">
+    </div>
+    <div class="profile-bio">
+        <p id="bioText">This is a placeholder bio. The user will be able to edit this.</p>
+        <div class="edit-container">
+            <img src="../img/edit-icon.png" alt="Edit Icon" class="edit-icon" onclick="toggleEditMenu()">
+            <div class="edit-menu" id="editMenu">
+                <a href="#" onclick="changeColor('blue')">Blue</a>
+                <a href="#" onclick="changeColor('red')">Red</a>
+                <a href="#" onclick="changeColor('green')">Green</a>
+                <a href="#" onclick="changeColor('yellow')">Yellow</a>
+                <a href="#" onclick="changeColor('purple')">Purple</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleEditMenu() {
+        const editMenu = document.getElementById('editMenu');
+        editMenu.style.display = editMenu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function changeColor(color) {
+        const header = document.querySelector('header');
+        header.style.backgroundColor = color;
+        localStorage.setItem('headerColor', color);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedColor = localStorage.getItem('headerColor');
+        if (savedColor) {
+            document.querySelector('header').style.backgroundColor = savedColor;
+        }
+    });
+</script>
+</body>
+</html>

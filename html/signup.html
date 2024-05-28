@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Chat App - Sign Up</title>
+    <link rel="stylesheet" href="../css/signup_style.css">
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <a href="home.html">
+            <img src="../img/logo.png" alt="My Chat App Logo" class="logo">
+        </a>
+    </div>
+    <div class="online-counter">
+        Chatters Online: <span id="onlineUsers">0</span>
+    </div>
+</header>
+<main class="signup-container">
+    <h2>Sign Up</h2>
+    <form action="/signup" method="POST" class="signup-form">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        <button type="submit" class="submit-button">Sign Up</button>
+    </form>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedColor = localStorage.getItem('headerColor');
+        if (savedColor) {
+            document.querySelector('header').style.backgroundColor = savedColor;
+        }
+    });
+</script>
+</body>
+</html>

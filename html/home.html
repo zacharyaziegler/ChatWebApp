@@ -9,7 +9,9 @@
 <body>
 <header>
     <div class="logo-container">
-        <img src="../img/logo.png" alt="My Chat App Logo" class="logo">
+        <a href="home.html">
+            <img src="../img/logo.png" alt="My Chat App Logo" class="logo">
+        </a>
     </div>
     <div class="online-counter">
         Chatters Online: <span id="onlineUsers">0</span>
@@ -18,22 +20,18 @@
 <div class="content">
     <aside class="friends-list">
         <h2>Friends</h2>
-        <div class="friends-category">
-            <div class="category-header" onclick="toggleCategory('online')">
-                Online <span id="onlineCount"></span> <span class="arrow" id="onlineArrow">▼</span>
-            </div>
-            <ul id="onlineFriends" class="friends-list-category">
-                <!-- Online friends will be rendered here -->
-            </ul>
+        <div class="category-header" onclick="toggleCategory('online')">
+            Online <span class="spacer"></span> <span id="onlineCount"></span> <span class="arrow" id="onlineArrow">▼</span>
         </div>
-        <div class="friends-category">
-            <div class="category-header" onclick="toggleCategory('offline')">
-                Offline <span id="offlineCount"></span> <span class="arrow" id="offlineArrow">▼</span>
-            </div>
-            <ul id="offlineFriends" class="friends-list-category">
-                <!-- Offline friends will be rendered here -->
-            </ul>
+        <ul id="onlineFriends" class="friends-list-category">
+            <!-- Online friends will be rendered here -->
+        </ul>
+        <div class="category-header" onclick="toggleCategory('offline')">
+            Offline <span class="spacer"></span> <span id="offlineCount"></span> <span class="arrow" id="offlineArrow">▼</span>
         </div>
+        <ul id="offlineFriends" class="friends-list-category">
+            <!-- Offline friends will be rendered here -->
+        </ul>
     </aside>
     <main class="home-container">
         <div class="interests-container">
@@ -43,16 +41,19 @@
         <button class="start-chatting" onclick="startChatting()">Start Chatting</button>
     </main>
 </div>
+<footer>
+    <div class="footer-profile" onclick="toggleProfileMenu()">
+        <img src="../img/profile.png" alt="Profile Picture">
+        <span id="username">Username</span>
+        <div class="footer-profile-menu" id="profileMenu">
+            <a href="profile.html">My Profile</a>
+            <a href="settings.html">Settings</a>
+        </div>
+    </div>
+</footer>
 
 <script>
     let interests = [];
-    let friends = [
-        { username: 'Alice', online: true },
-        { username: 'Bob', online: false },
-        { username: 'Charlie', online: true },
-        { username: 'Dave', online: false },
-        { username: 'Eve', online: true }
-    ];
 
     function handleKeyUp(event) {
         const input = document.getElementById('interests');
@@ -73,8 +74,22 @@
             const interestSpan = document.createElement('span');
             interestSpan.className = 'interest-tag';
             interestSpan.textContent = interest;
+            interestSpan.onclick = function() {
+                removeInterest(interest);
+            };
             display.appendChild(interestSpan);
         });
+    }
+
+    function removeInterest(interest) {
+        interests = interests.filter(i => i !== interest);
+        renderInterests();
+    }
+
+    function startChatting() {
+        const interestsArray = Array.from(interests);
+        localStorage.setItem('userInterests', JSON.stringify(interestsArray));
+        window.location.href = 'chat.html';
     }
 
     function toggleCategory(category) {
@@ -88,6 +103,29 @@
             arrow.textContent = '▲';
         }
     }
+
+    const friends = [
+        { username: 'Friend1', online: true },
+        { username: 'Friend2', online: true },
+        { username: 'Friend3', online: true },
+        { username: 'Friend4', online: true },
+        { username: 'Friend5', online: true },
+        { username: 'Friend6', online: true },
+        { username: 'Friend7', online: true },
+        { username: 'Friend8', online: true },
+        { username: 'Friend9', online: true },
+        { username: 'Friend10', online: true },
+        { username: 'Friend11', online: false },
+        { username: 'Friend12', online: false },
+        { username: 'Friend13', online: false },
+        { username: 'Friend14', online: false },
+        { username: 'Friend15', online: false },
+        { username: 'Friend16', online: false },
+        { username: 'Friend17', online: false },
+        { username: 'Friend18', online: false },
+        { username: 'Friend19', online: false },
+        { username: 'Friend20', online: false },
+    ];
 
     function renderFriends() {
         const onlineFriendsList = document.getElementById('onlineFriends');
@@ -154,9 +192,9 @@
         renderFriends();
     }
 
-    function startChatting() {
-        alert('Start Chatting button clicked!');
-        // Implement actual functionality here
+    function toggleProfileMenu() {
+        const profileMenu = document.getElementById('profileMenu');
+        profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
     }
 
     // Initial render
