@@ -9,7 +9,9 @@
 <body>
 <header>
     <div class="logo-container">
-        <img src="../img/logo.png" alt="My Chat App Logo" class="logo">
+        <a href="home.html">
+            <img src="../img/logo.png" alt="My Chat App Logo" class="logo">
+        </a>
     </div>
     <div class="online-counter">
         Chatters Online: <span id="onlineUsers">0</span>
@@ -47,11 +49,25 @@
             const chatMessages = document.getElementById('chatMessages');
             const messageElement = document.createElement('div');
             messageElement.className = 'message you';
-            messageElement.textContent = 'You: ' + message;
+            messageElement.innerHTML = '<span class="user-name">You:</span> <span class="message-content">' + message + '</span>';
             chatMessages.appendChild(messageElement);
             input.value = '';
+            scrollToBottom(chatMessages); // Scroll to bottom after adding message
             // Send the message to the server here and display it on the other user's chat board
         }
+    }
+
+    function receiveMessage(username, message) {
+        const chatMessages = document.getElementById('chatMessages');
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message other';
+        messageElement.innerHTML = '<span class="stranger-name">' + username + ':</span> <span class="message-content">' + message + '</span>';
+        chatMessages.appendChild(messageElement);
+        scrollToBottom(chatMessages); // Scroll to bottom after receiving message
+    }
+
+    function scrollToBottom(element) {
+        element.scrollTop = element.scrollHeight;
     }
 
     function skipChat() {

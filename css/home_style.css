@@ -1,5 +1,5 @@
 /* Basic reset for styling consistency */
-body, h1, h2, h3, p, form, input, button, ul, li {
+body, h1, h2, h3, p, form, input, button {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -43,20 +43,17 @@ header {
 .content {
     display: flex;
     width: 100%;
+    flex-grow: 1;
     margin-top: 60px; /* Adjust for fixed header height */
+    overflow: hidden; /* Prevents overflowing content */
 }
 
-aside.friends-list {
-    width: 250px;
-    background-color: rgba(34, 34, 34, 0.8); /* Slightly darker and transparent */
-    padding: 20px;
-    border-right: 1px solid #444;
-    box-sizing: border-box;
-}
-
-.friends-list h2 {
-    color: #007BFF;
-    margin-bottom: 10px;
+.friends-list {
+    width: 20%;
+    padding: 10px;
+    background-color: #222; /* Matching the background color for footer */
+    overflow-y: auto; /* Enables internal vertical scrolling */
+    height: calc(100vh - 120px); /* Adjusts for header and footer height */
 }
 
 .friends-category {
@@ -64,37 +61,24 @@ aside.friends-list {
 }
 
 .category-header {
-    color: #007BFF;
+    font-weight: bold;
     cursor: pointer;
-    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.category-header .arrow {
-    font-size: 0.8em;
-    margin-left: auto; /* Ensure the arrow stays on the right side */
-}
-
 .friends-list-category {
     list-style: none;
-    padding: 0;
-    display: block; /* Ensure it is block initially */
+    padding-left: 10px;
 }
 
 .friend-item {
-    position: relative;
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 4px;
+    justify-content: space-between;
+    padding: 5px 0;
     cursor: pointer;
-}
-
-.friend-item:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Darken on hover */
 }
 
 .friend-item .status {
@@ -105,47 +89,36 @@ aside.friends-list {
 }
 
 .friend-item .status.online {
-    background-color: #00ff00; /* Green for online */
+    background-color: #00ff00;
 }
 
 .friend-item .status.offline {
-    background-color: #ff0000; /* Red for offline */
+    background-color: #ff0000;
 }
 
-.friend-item .username {
-    color: #ccc;
-}
-
-.friend-menu {
-    display: none; /* Hidden by default */
+.friend-item .friend-menu {
+    display: none;
     position: absolute;
-    top: 30px;
-    left: 0;
     background-color: #444;
-    border: 1px solid #555;
     border-radius: 4px;
     padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 10;
 }
 
 .friend-menu a {
-    display: block;
     color: #ccc;
     text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 4px;
+    display: block;
+    padding: 5px 0;
 }
 
 .friend-menu a:hover {
-    background-color: #555;
-    color: white;
+    color: #fff;
 }
 
-main.home-container {
+.home-container {
     flex-grow: 1;
-    margin: 20px;
-    text-align: center;
+    padding: 20px;
 }
 
 .interests-container {
@@ -165,6 +138,7 @@ main.home-container {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+    width: 100%;
 }
 
 .interest-tag {
@@ -199,4 +173,57 @@ main.home-container {
 
 .start-chatting:hover {
     background-color: #0056b3; /* Darker blue on hover */
+}
+
+footer {
+    background-color: #007BFF; /* Cool blue */
+    height: 40px; /* Slightly larger than original */
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.footer-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.footer-profile img {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.footer-profile-menu {
+    display: none;
+    position: absolute;
+    bottom: 40px; /* Position above the footer */
+    right: 0;
+    background-color: #444;
+    border-radius: 4px;
+    padding: 10px;
+    z-index: 10;
+}
+
+.footer-profile-menu a {
+    color: #ccc;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+}
+
+.footer-profile-menu a:hover {
+    color: #fff;
+}
+
+.spacer {
+    flex-grow: 1;
 }

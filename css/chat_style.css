@@ -96,14 +96,30 @@ header {
     word-wrap: break-word; /* Ensure long messages wrap */
     white-space: pre-wrap; /* Ensure long messages wrap */
     overflow-wrap: break-word; /* Prevent long words from breaking layout */
+    color: white; /* Default message color */
 }
 
-.message.you {
-    color: #00ff00; /* Green for 'You' messages */
+.message .user-name {
+    font-weight: bold;
+    color: #007BFF; /* Blue for 'You' */
 }
 
-.message.other {
-    color: #007BFF; /* Blue for other user messages */
+.message .stranger-name {
+    font-weight: bold;
+    color: red; /* Red for stranger */
+}
+
+.message-content {
+    font-weight: normal;
+    color: white; /* Message text color */
+}
+
+.message.you .message-content {
+    display: inline;
+}
+
+.message.other .message-content {
+    display: inline;
 }
 
 .chat-input {
