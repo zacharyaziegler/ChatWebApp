@@ -20,6 +20,18 @@
         <!-- Placeholder for big logo when created -->
         <img src="img/big-logo-placeholder.png" alt="Big Logo Placeholder">
     </div>
+
+    <!-- Flash Messages -->
+    <% if (typeof success_msg != 'undefined') { %>
+    <div class="flash-success"><%= success_msg %></div>
+    <% } %>
+    <% if (typeof error_msg != 'undefined') { %>
+    <div class="flash-error"><%= error_msg %></div>
+    <% } %>
+    <% if (typeof error != 'undefined') { %>
+    <div class="flash-error"><%= error %></div>
+    <% } %>
+
     <form action="/users/login" method="POST" class="login-form">
         <input type="email" id="email" name="email" placeholder="Enter your email" required>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
