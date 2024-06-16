@@ -20,7 +20,19 @@
         <!-- Placeholder for big logo when created -->
         <img src="img/big-logo-placeholder.png" alt="Big Logo Placeholder">
     </div>
-    <form id="loginForm" class="login-form" onsubmit="handleLogin(event)">
+
+    <!-- Flash Messages -->
+    <% if (typeof success_msg != 'undefined') { %>
+    <div class="flash-success"><%= success_msg %></div>
+    <% } %>
+    <% if (typeof error_msg != 'undefined') { %>
+    <div class="flash-error"><%= error_msg %></div>
+    <% } %>
+    <% if (typeof error != 'undefined') { %>
+    <div class="flash-error"><%= error %></div>
+    <% } %>
+
+    <form action="/users/login" method="POST" class="login-form">
         <input type="email" id="email" name="email" placeholder="Enter your email" required>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
         <button type="submit">Log In</button>
@@ -31,34 +43,9 @@
 </main>
 
 <script>
-    async function handleLogin(event) {
-        event.preventDefault(); // Prevent form submission
-
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-
-        try {
-            const response = await fetch('/users/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                console.log('Login successful');
-                window.location.href = 'home.html';
-            } else {
-                console.error('Login failed', result.message);
-                alert('Login failed: ' + result.message);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again later.');
-        }
+    function handleLogin() {
+        // Assuming user has the right credentials (for now, just navigate to home.html)
+        window.location.href = 'home.html';
     }
 </script>
 </body>

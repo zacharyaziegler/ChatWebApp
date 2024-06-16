@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Chat App - Sign Up</title>
-    <link rel="stylesheet" href="../css/signup_style.css">
+    <link rel="stylesheet" href="/css/signup_style.css">
 </head>
 <body>
 <header>
     <div class="logo-container">
-        <a href="home.html">
-            <img src="../img/logo.png" alt="My Chat App Logo" class="logo">
+        <a href="/home.html">
+            <img src="/html/img/logo.png" alt="My Chat App Logo">
         </a>
     </div>
     <div class="online-counter">
@@ -19,14 +19,16 @@
 </header>
 <main class="signup-container">
     <h2>Sign Up</h2>
-    <form action="/signup" method="POST" class="signup-form">
+    <form id="signupForm" action="/users/register" method="POST" class="signup-form">
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
+            <span id="emailError" class="error"></span>
         </div>
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
+            <span id="usernameError" class="error"></span>
         </div>
         <div class="form-group">
             <label for="dob">Date of Birth</label>
@@ -35,21 +37,96 @@
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
+            <div id="passwordRequirements">
+                <p><span id="length" class="invalid">❌</span> At least 8 characters</p>
+                <p><span id="lowercase" class="invalid">❌</span> A lowercase letter</p>
+                <p><span id="uppercase" class="invalid">❌</span> An uppercase letter</p>
+                <p><span id="number" class="invalid">❌</span> A number</p>
+                <p><span id="special" class="invalid">❌</span> A special character (!@#$%^&*())</p>
+            </div>
         </div>
         <div class="form-group">
             <label for="confirmPassword">Confirm Password</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <span id="confirmPasswordError" class="error"></span>
         </div>
         <button type="submit" class="submit-button">Sign Up</button>
     </form>
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedColor = localStorage.getItem('headerColor');
-        if (savedColor) {
-            document.querySelector('header').style.backgroundColor = savedColor;
+    const emailInput = document.getElementById('email');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+
+    const lengthCheck = document.getElementById('length');
+    const lowercaseCheck = document.getElementById('lowercase');
+    const uppercaseCheck = document.getElementById('uppercase');
+    const numberCheck = document.getElementById('number');
+    const specialCheck = document.getElementById('special');
+
+    const emailError = document.getElementById('emailError');
+    const usernameError = document.getElementById('usernameError');
+    const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+    const passwordRequirements = {
+        length: false,
+        lowercase: false,
+        uppercase: false,
+        number: false,
+        special: false
+    };
+
+    emailInput.addEventListener('input', () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        emailError.textContent = emailRegex.test(emailInput.value) ? '' : 'Invalid email format';
+    });
+
+    usernameInput.addEventListener('input', () => {
+        // Here, you could make an AJAX call to check if the username is unique
+        usernameError.textContent = ''; // Reset error message for now
+    });
+
+    passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+
+        passwordRequirements.length = password.length >= 8;
+        passwordRequirements.lowercase = /[a-z]/.test(password);
+        passwordRequirements.uppercase = /[A-Z]/.test(password);
+        passwordRequirements.number = /[0-9]/.test(password);
+        passwordRequirements.special = /[!@#$%^&*()]/.test(password);
+
+        lengthCheck.textContent = passwordRequirements.length ? '✅' : '❌';
+        lowercaseCheck.textContent = passwordRequirements.lowercase ? '✅' : '❌';
+        uppercaseCheck.textContent = passwordRequirements.uppercase ? '✅' : '❌';
+        numberCheck.textContent = passwordRequirements.number ? '✅' : '❌';
+        specialCheck.textContent = passwordRequirements.special ? '✅' : '❌';
+    });
+
+    confirmPasswordInput.addEventListener('input', () => {
+        confirmPasswordError.textContent = confirmPasswordInput.value === passwordInput.value ? '' : 'Passwords do not match';
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+        if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+            e.preventDefault();
+            emailError.textContent = 'Invalid email format';
         }
+
+        // Check for password requirements
+        const allValid = Object.values(passwordRequirements).every(Boolean);
+        if (!allValid) {
+            e.preventDefault();
+            alert('Password does not meet the requirements.');
+        }
+
+        if (confirmPasswordInput.value !== passwordInput.value) {
+            e.preventDefault();
+            confirmPasswordError.textContent = 'Passwords do not match';
+        }
+
+        // You could also add a check for the username uniqueness here
     });
 </script>
 </body>

@@ -1,5 +1,5 @@
 /* Basic reset for styling consistency */
-body, h1, h2, h3, p, form, input, button, label {
+body, h1, h2, h3, p, form, input, button {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -44,46 +44,70 @@ header {
     margin-top: 100px; /* Adjust for header height */
     text-align: center;
     width: 100%;
-    padding: 20px;
-}
-
-h2 {
-    color: #fff;
 }
 
 .signup-form {
-    background-color: #444;
+    background-color: #222; /* Darker form background */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Slightly darker shadow for depth */
     width: 300px;
     margin: auto;
-    display: flex;
-    flex-direction: column;
+    position: relative;
 }
 
-.form-group {
+.signup-form .form-group {
     margin-bottom: 15px;
+    text-align: left;
 }
 
-.form-group label {
+.signup-form .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: #ccc;
 }
 
-.form-group input {
+.signup-form .form-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #555;
+    margin-bottom: 5px;
+    background-color: #444; /* Dark input fields for contrast */
+    border: 1px solid #555; /* Subtle borders for inputs */
+    color: #ddd; /* Light text color for inputs */
     border-radius: 4px;
-    background-color: #555;
-    color: white;
 }
 
-.submit-button {
+.signup-form .form-group .error {
+    color: red;
+    font-size: 0.8em;
+}
+
+.signup-form #passwordRequirements {
+    background-color: #444;
+    color: #ddd;
     padding: 10px;
-    background-color: #007BFF; /* Cool blue for button */
+    border-radius: 4px;
+    position: absolute;
+    right: -320px; /* Adjust according to your layout */
+    top: 265px; /* Adjust according to your layout */
+    width: 300px;
+}
+
+.signup-form #passwordRequirements p {
+    margin-bottom: 5px;
+}
+
+.signup-form #passwordRequirements .invalid {
+    color: red;
+}
+
+.signup-form #passwordRequirements .valid {
+    color: green;
+}
+
+.signup-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF; /* Cool blue for buttons */
     color: white;
     border: none;
     border-radius: 4px;
@@ -91,6 +115,7 @@ h2 {
     transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
-.submit-button:hover {
+.signup-form button:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }
+
