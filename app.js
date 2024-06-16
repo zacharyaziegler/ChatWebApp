@@ -2,8 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
+const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const path = require('path');
+const MongoStore = require('connect-mongo');
 
 const app = express();
 
@@ -11,10 +13,10 @@ const app = express();
 require('./config/passport')(passport);
 
 // DB Config
-const db = 'mongodb://localhost:27017/myChatAppDB';
+const dbURI = "mongodb://localhost:27017/myChatAppDB";
 
 // Connect to MongoDB
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
@@ -22,23 +24,37 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Set static folders
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/html', express.static(path.join(__dirname, 'html')));
-app.use('/css', express.static(path.join(__dirname, 'css')));
+// Set static folder
+app.use(express.static(path.join(__dirname)));
 
 // Express session
 app.use(
     session({
-        secret: 'secret',
-        resave: true,
-        saveUninitialized: true
+        secret: 'your_secret_key',
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: dbURI,
+            collectionName: 'sessions'
+        }),
+        cookie: { maxAge: 180 * 60 * 1000 } // 3 hours
     })
 );
 
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Connect flash
+app.use(flash());
+
+// Global variables
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
 
 // Routes
 app.use('/users', require('./routes/users'));
@@ -48,10 +64,25 @@ app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'signup.html'));
 });
 
-// Render index.html (login page)
+// Render login.html
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'index.html'));
 });
 
+// Render home.html, ensure authentication
+app.get('/home', ensureAuthenticated, (req, res) => {
+     console.log(req.user);
+    res.sendFile(path.join(__dirname, 'html', 'home.html'));
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+// Middleware function to check if user is authenticated
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    req.flash('error_msg', 'Please log in to view that resource');
+    res.redirect('/login');
+}

@@ -4,17 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="970af86a-6a78-4766-ace7-742f0288732a" name="Changes" comment="Foundation laid out and node.js added">
-      <change afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/passport.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/index.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
+    <list default="true" id="970af86a-6a78-4766-ace7-742f0288732a" name="Changes" comment="Signup and login implemented with mongodb">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/passport.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/signup_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/signup_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +101,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716925354302</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Signup and login implemented with mongodb">
+      <option name="closed" value="true" />
+      <created>1717873131487</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1717873131487</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -110,6 +118,7 @@
     <MESSAGE value="Foundation laid out and node.js dep added" />
     <MESSAGE value="Initial commit with project setup and dependencies" />
     <MESSAGE value="Foundation laid out and node.js added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Foundation laid out and node.js added" />
+    <MESSAGE value="Signup and login implemented with mongodb" />
+    <option name="LAST_COMMIT_MESSAGE" value="Signup and login implemented with mongodb" />
   </component>
 </project>
